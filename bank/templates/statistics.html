@@ -1,0 +1,68 @@
+{%extends 'table.html'%}
+{%block title%}
+业务统计
+{%endblock%}
+
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename = 'customer_create.css')}}">
+
+{%endblock%}
+
+{%block main%}
+<div class="create_main">
+    <div class="form_contain">
+    <h3>储蓄账户</h3>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>支行名</th>
+            <th>总金额</th>
+            <th>总用户</th>
+        </tr>
+        {%for i in save%}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    <h3>支票账户</h3>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>支行名</th>
+            <th>总金额</th>
+            <th>总用户</th>
+        </tr>
+        {%for i in check%}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    <h3>贷款</h3>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>支行名</th>
+            <th>总金额</th>
+            <th>总用户</th>
+        </tr>
+        {%for i in loan%}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    <form class="form-horizontal" method="post">
+      <div class="form-group">
+          <button type="submit" class="btn btn-primary" name="money">总金额柱状图</button>
+          <button type="submit" class="btn btn-primary" name="customer">总用户柱状图</button>
+
+      </div>
+    </form>
+    </div>
+</div>
+{%endblock%}

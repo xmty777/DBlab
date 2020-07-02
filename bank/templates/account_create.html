@@ -1,0 +1,109 @@
+{%extends 'table.html'%}
+{%block title%}
+新建账户
+{%endblock%}
+
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename = 'customer_create.css')}}">
+{%endblock%}
+
+{%block main%}
+<div class="create_main">
+    <h3>请输入下列信息（均不能为空）</h3>
+    <div class="form_contain">
+    <form class="form-horizontal" method="post">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">账户号(6位)</label>
+        <div class="col-sm-10">
+          <input type="id" class="form-control" id="id" name="id" placeholder="请输入账户号" required="required">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">余额</label>
+        <div class="col-sm-10">
+          <input type="money" class="form-control" id="money" name="money" placeholder="请输入余额" required="required">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">开户银行</label>
+        <div class="col-sm-10">
+          <select class="form-control" name="bank" id="bank">
+            {%for k in bank%}
+              <option value="{{k}}">{{k}}</option>
+            {%endfor%}
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">开户日期</label>
+        <div class="col-sm-10">
+          <input type="place" class="form-control" id="date" name="date" placeholder="请输入开户日期，如，2020-01-01" required="required">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">账户类型</label>
+        <div class="col-sm-10">
+          <label class="radio-inline">
+            <input type="radio" name="op" id="op1" value="储蓄账户"> 储蓄账户
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="op" id="op2" value="支票账户"> 支票账户
+          </label>
+        </div>
+      </div>
+      <div class="form-group mysave" hidden>
+        <label class="col-sm-2 control-label">货币类型</label>
+        <div class="col-sm-10">
+          <input type="type" class="form-control" id="type" name="type" placeholder="请输入货币类型">
+        </div>
+      </div>
+      <div class="form-group mysave" hidden>
+        <label class="col-sm-2 control-label">利率</label>
+        <div class="col-sm-10">
+          <input type="interest_rate" class="form-control" id="interest_rate" name="interest_rate" placeholder="请输入利率">
+        </div>
+      </div>
+      <div class="form-group mycheque" hidden>
+        <label class="col-sm-2 control-label">透支额</label>
+        <div class="col-sm-10">
+          <input type="overdraft" class="form-control" id="overdraft" name="overdraft" placeholder="请输入透支额">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">客户</label>
+        <div class="col-sm-10">
+          <input type="customer" class="form-control" id="customer" name="customer" placeholder="请输入客户身份证号">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+      </div>
+    </form>
+    {%if success == 1%}
+      <h3>创建成功</h3>
+    {%endif%}
+    {%if failed == 1%}
+      <h3>输入信息有误，请仔细核对</h3>
+    {%endif%}
+    {%if failed == 2%}
+        <h3>创建失败</h3>
+    {%endif%}
+    {%if failed == 3%}
+        <h3>无此客户</h3>
+    {%endif%}
+    </div>
+</div>
+<script>
+  $('#op1').click(function(){
+              $('.mysave').show();
+              $('.mycheque').hide();
+              });
+  $('#op2').click(function(){
+              $('.mysave').hide();
+              $('.mycheque').show();
+              });
+
+</script>
+{%endblock%}

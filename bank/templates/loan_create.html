@@ -1,0 +1,70 @@
+{%extends 'table.html'%}
+{%block title%}
+新建贷款
+{%endblock%}
+
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename = 'customer_create.css')}}">
+{%endblock%}
+
+{%block main%}
+<div class="create_main">
+    <h3>请输入下列信息(先添加客户，后填入信息)</h3>
+    <div class="form_contain">
+    <form class="form-horizontal" method="post">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">贷款号(4位)</label>
+        <div class="col-sm-10">
+          <input type="id" class="form-control" id="id" name="id" placeholder="请输入贷款号">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">贷款金额</label>
+        <div class="col-sm-10">
+          <input type="money" class="form-control" id="money" name="money" placeholder="请输入贷款金额">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">贷款银行</label>
+        <div class="col-sm-10">
+          <select class="form-control" name="bank" id="bank">
+            {%for k in bank%}
+              <option value="{{k}}">{{k}}</option>
+            {%endfor%}
+          </select>
+        </div>
+      </div>
+      {%for i in number%}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">客户{{i+1}}</label>
+        <div class="col-sm-10">
+          <input type="customer" class="form-control" id="customer{{i}}" name="customer{{i}}" placeholder="请输入客户身份证号">
+        </div>
+      </div>
+      {%endfor%}
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="add">添加客户</button>
+          <button type="submit" class="btn btn-primary" name="delete">删除客户</button>
+          <button type="submit" class="btn btn-primary" name="submit">申请贷款</button>
+        </div>
+      </div>
+
+    </form>
+    {%if success == 1%}
+      <h3>创建成功</h3>
+    {%endif%}
+    {%if failed == 1%}
+      <h3>输入信息有误，请仔细核对</h3>
+    {%endif%}
+    {%if failed == 2%}
+        <h3>创建失败,可能不存在该客户</h3>
+    {%endif%}
+    {%if failed == 3%}
+        <h3>无此客户</h3>
+    {%endif%}
+    </div>
+</div>
+<script>
+</script>
+{%endblock%}

@@ -1,0 +1,73 @@
+{%extends 'table.html'%}
+{%block title%}
+查找客户信息
+{%endblock%}
+
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename = 'customer_create.css')}}">
+{%endblock%}
+
+{%block main%}
+<div class="create_main">
+    <h3>请输入身份证号进行查找</h3>
+    <div class="form_contain">
+    <form class="form-inline" method="post">
+      {%if find_all == 1%}
+      <label style="margin:10px">身份证号</label>
+      <select class="form-control"  style="min-width:300px" name="id" id="id1">
+          {%for i in r%}
+            <option value="{{i[0]}}">{{i[0]}}</option>
+          {%endfor%}
+      </select>
+      <button type="submit" class="btn btn-primary" style="margin:10px">查询</button>
+      {%else%}
+      <label style="margin:10px">身份证号</label>
+      <input type="text" class="form-control"  style="min-width:300px" name="id" id="id0">
+      <button type="submit" class="btn btn-primary" style="margin:10px">查询</button>
+      {%endif%}
+    </form>
+    {% if failed == 1 %}
+        <h3>输入信息有误，请仔细核对</h3>
+    {% endif %}
+    {% if success == 1 %}
+    <table class="table table-hover table-bordered">
+        <tr>
+            <td>身份证号</td>
+            <td>{{r[0]}}</td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td>{{r[1]}}</td>
+        </tr>
+        <tr>
+            <td>手机号</td>
+            <td>{{r[2]}}</td>
+        </tr>
+        <tr>
+            <td>家庭住址</td>
+            <td>{{r[3]}}</td>
+        </tr>
+        <tr>
+            <td>联系人姓名</td>
+            <td>{{r[5]}}</td>
+        </tr>
+        <tr>
+            <td>联系人手机号</td>
+            <td>{{r[4]}}</td>
+        </tr>
+        <tr>
+            <td>联系人email</td>
+            <td>{{r[6]}}</td>
+        </tr>
+        <tr>
+            <td>联系人关系</td>
+            <td>{{r[7]}}</td>
+        </tr>
+    </table>
+    {% endif %}
+    {%if failed == 2%}
+        <h3>查无此人</h3>
+    {%endif%}
+    </div>
+</div>
+{%endblock%}

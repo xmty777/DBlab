@@ -1,0 +1,70 @@
+{%extends 'table.html'%}
+{%block title%}
+删除贷款
+{%endblock%}
+
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename = 'customer_create.css')}}">
+{%endblock%}
+
+{%block main%}
+<div class="create_main">
+    <h3>请输入贷款号进行删除</h3>
+    <div class="form_contain">
+    <form class="form-inline" method="post">
+      <div class="form-group">
+        <label style="margin:10px">贷款号</label>
+        <input type="id" class="form-control" id="id" name="id" placeholder="请输入贷款号" style="margin:10px;min-width:300px">
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin:10px" name="delete">删除</button>
+    </form>
+    {%if success == 1%}
+    <table class="table table-hover table-bordered">
+        <tr>
+            <td>贷款号</td>
+            <td>{{r[0]}}</td>
+        </tr>
+        <tr>
+            <td>贷款金额</td>
+            <td>{{r[1]}}</td>
+        </tr>
+        <tr>
+            <td>贷款银行</td>
+            <td>{{r[2]}}</td>
+        </tr>
+        <tr>
+            <td>贷款状态</td>
+            <td>{{r[3]}}</td>
+        </tr>
+        {%for i in r[4:]%}
+        <tr>
+            <td>客户</td>
+            <td>{{i[0]}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    <form class="form-horizontal" method="post">
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="sure">确认删除</button>
+        </div>
+      </div>
+    </form>
+    {%endif%}
+    {%if success == 2%}
+      <h3>删除成功</h3>
+    {%endif%}
+    {%if failed == 1%}
+      <h3>输入信息有误，请仔细核对</h3>
+    {%endif%}
+    {%if failed == 2%}
+        <h3>无此贷款</h3>
+    {%endif%}
+    {%if failed == 3%}
+        <h3>删除失败</h3>
+    {%endif%}
+    </div>
+</div>
+<script>
+</script>
+{%endblock%}

@@ -1,0 +1,11 @@
+.create_main{
+    width:800px;
+    background:#f3f3f3;
+    margin: 0 auto;
+    overflow:hidden;
+}
+
+.form_contain{
+    width:700px;
+    margin: 0 auto;
+}

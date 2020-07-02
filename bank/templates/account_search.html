@@ -1,0 +1,105 @@
+{%extends 'table.html'%}
+{%block title%}
+查询账户信息
+{%endblock%}
+
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename = 'customer_create.css')}}">
+<script>
+
+</script>
+{%endblock%}
+{%block main%}
+<div class="create_main">
+    <h3>请输入账户号或客户身份证号进行查找</h3>
+    <div class="form_contain">
+    <form class="form-inline" method="post">
+      {%if find_all == 1%}
+      <div class="form-group">
+      <select id="way1" name="way" class="form-control">
+        <option value="账户号">账户号</option>
+      </select>
+      </div>
+      <select class="form-control"  style="min-width:300px" name="id0" id="id1">
+          {%for i in r%}
+            <option value="{{i[0]}}">{{i[0]}}</option>
+          {%endfor%}
+      </select>
+      <button type="submit" class="btn btn-primary" style="margin:10px">查询</button>
+      {%else%}
+      <div class="form-group">
+      <select id="way" name="way" class="form-control">
+        <option value="账户号">账户号</option>
+        <option value="身份证号">身份证号</option>
+      </select>
+      </div>
+      <input type="text" class="form-control"  style="min-width:300px" name="id0" id="id0">
+      <button type="submit" class="btn btn-primary" style="margin:10px">查询</button>
+      {%endif%}
+    </form>
+    {%for r in results%}
+    <table class="table table-hover table-bordered">
+        <tr>
+            <td>账户号</td>
+            <td>{{r[0]}}</td>
+        </tr>
+        <tr>
+            <td>余额</td>
+            <td>{{r[1]}}</td>
+        </tr>
+        <tr>
+            <td>开户银行</td>
+            <td>{{r[2]}}</td>
+        </tr>
+        <tr>
+            <td>开户日期</td>
+            <td>{{r[3]}}</td>
+        </tr>
+        <tr>
+            <td>账户类型</td>
+            <td>{{r[4]}}</td>
+        </tr>
+        {%if r[4] == '储蓄账户'%}
+        <tr>
+            <td>货币类型</td>
+            <td>{{r[8]}}</td>
+        </tr>
+        <tr>
+            <td>利率</td>
+            <td>{{r[7]}}</td>
+        </tr>
+        {%endif%}
+        {%if r[4] == '支票账户'%}
+        <tr>
+            <td>透支额</td>
+            <td>{{r[7]}}</td>
+        </tr>
+        {%endif%}
+        <tr>
+            <td>客户</td>
+            <td>{{r[5]}}</td>
+        </tr>
+        <tr>
+            <td>最近访问</td>
+            <td>{{r[6]}}</td>
+        </tr>
+    </table>
+    {%endfor%}
+    {%if success == 1%}
+      <h3>创建成功</h3>
+    {%endif%}
+    {%if failed == 1%}
+      <h3>输入信息有误，请仔细核对</h3>
+    {%endif%}
+    {%if failed == 2%}
+        <h3>创建失败</h3>
+    {%endif%}
+    {%if failed == 3%}
+        <h3>无此客户</h3>
+    {%endif%}
+    {%if failed == 4%}
+        <h3>无此账户</h3>
+    {%endif%}
+    </div>
+</div>
+{%endblock%}

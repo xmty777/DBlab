@@ -1,0 +1,55 @@
+{%extends 'table.html'%}
+{%block title%}
+发放贷款
+{%endblock%}
+
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename = 'customer_create.css')}}">
+{%endblock%}
+
+{%block main%}
+<div class="create_main">
+    <h3>请输入下列信息</h3>
+    <div class="form_contain">
+    <form class="form-horizontal" method="post">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">待发放贷款号</label>
+        <div class="col-sm-10">
+          <input type="id" class="form-control" id="id" name="id" placeholder="请输入贷款号">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">选择发放客户</label>
+        <div class="col-sm-10">
+          <input type="customer" class="form-control" id="customer" name="customer" placeholder="请输入身份证号">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">选择发放金额</label>
+        <div class="col-sm-10">
+          <input type="money" class="form-control" id="money" name="money" placeholder="请输入贷款金额">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">发放贷款</button>
+        </div>
+      </div>
+    </form>
+    {%if success == 1%}
+      <h3>发放成功</h3>
+    {%endif%}
+    {%if failed == 1%}
+      <h3>输入信息有误，请仔细核对</h3>
+    {%endif%}
+    {%if failed == 2%}
+        <h3>无此客户或贷款</h3>
+    {%endif%}
+    {%if failed == 3%}
+        <h3>发放失败</h3>
+    {%endif%}
+    </div>
+</div>
+<script>
+</script>
+{%endblock%}
